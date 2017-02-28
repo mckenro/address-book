@@ -10,6 +10,7 @@ function Address(street, city, state) {
   this.city = city;
   this.state = state;
 }
+
 Contact.prototype.fullName = function () {
   return this.firstName + " " + this.lastName;
 }
@@ -18,10 +19,14 @@ Address.prototype.fullAddress = function() {
   return this.street + ", " + this.city + ", " + this.state;
 }
 
+//UI Logic
 $(document).ready(function() {
-
   $("#add-address").click(function() {
     $("#new-addresses").append('<div class="new-address">' +
+                                  '<div class="form-group">' +
+                                    '<label for="address-type">Address Type</label>' +
+                                    '<input type="text" class="form-control address-type">' +
+                                  '</div>' +
                                  '<div class="form-group">' +
                                    '<label for="new-street">Street</label>' +
                                    '<input type="text" class="form-control new-street">' +
@@ -45,6 +50,7 @@ $(document).ready(function() {
     var newContact = new Contact(inputtedFirstName, inputtedLastName);
 
     $(".new-address").each(function() {
+      var inputtedType = $(this).find("input.address-type").val();
       var inputtedStreet = $(this).find("input.new-street").val();
       var inputtedCity = $(this).find("input.new-city").val();
       var inputtedState = $(this).find("input.new-state").val();
@@ -69,6 +75,7 @@ $(document).ready(function() {
   function resetFields() {
       $("input#new-first-name").val("");
       $("input#new-last-name").val("");
+      $("input.address-type").val("");
       $("input.new-street").val("");
       $("input.new-city").val("");
       $("input.new-state").val("");
